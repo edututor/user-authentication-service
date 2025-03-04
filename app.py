@@ -1,8 +1,6 @@
-from fastapi import FastAPI, Depends, HTTPException, APIRouter
+from fastapi import FastAPI, Depends
 from fastapi.responses import JSONResponse
 from routes.auth import auth_router
-from schemas.schemas import UserCreate, UserResponse
-from models.user import User
 from core.database import SessionLocal, engine, Base
 from sqlalchemy.orm import Session
 import os
