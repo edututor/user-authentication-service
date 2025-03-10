@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from routes.auth import auth_router
 from core.database import SessionLocal, engine, Base
 from sqlalchemy.orm import Session
@@ -9,6 +10,16 @@ app = FastAPI()
 # Include authentication routes
 app.include_router(auth_router)
 Base.metadata.create_all(bind=engine)
+
+# Allow frontend access (adjust origins as needed)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Dependency for DB session
 def get_db():
     db = SessionLocal()
