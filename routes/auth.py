@@ -63,5 +63,18 @@ def login(user_data: UserLogin, db: Session = Depends(get_db)):
     # Generate JWT token
     access_token = create_access_token({"sub": user.email})
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    # Prepare user data (exclude password)
+    user_data_response = {
+        "id": user.id,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email
+    }
+
+    # Return both token and user
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user": user_data_response
+    }
 

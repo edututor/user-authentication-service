@@ -32,7 +32,7 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 class TokenResponse(BaseModel):
-    """Schema for returning JWT token after login"""
     access_token: str
     token_type: str = "bearer"
+    user: UserResponse  # Include user info
 
